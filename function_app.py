@@ -1,9 +1,13 @@
+import logging
 from flask import Flask, request, jsonify
 import joblib
 import numpy as np
+import azure.functions as func
 
+# Flask 앱 생성
 app = Flask(__name__)
 
+# 모델 및 스케일러 로드
 model = joblib.load("stress_model.pkl")
 scaler = joblib.load("scaler.pkl")
 
@@ -42,5 +46,7 @@ def predict_stress_endpoint():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# Azure Functions용 엔트리 포인트
+def main(req: func.HttpRequest, context: func.Context) -> func.HttpResponse:
+    from azure.functions._http_wsgi import WsgiMiddleware
+    return WsgiMiddleware(app).handle(req, context)
