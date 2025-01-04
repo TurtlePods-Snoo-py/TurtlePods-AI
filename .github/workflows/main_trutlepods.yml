@@ -32,7 +32,7 @@ jobs:
           source venv/bin/activate
 
       - name: Install dependencies
-        run: pip install Flask joblib numpy scikit-learn
+        run: pip install -r requirements.txt
 
       # Optional: Add step to run tests here
 
@@ -66,9 +66,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_64ECD542ED4D4C78BB4A3623D94AD0BE }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_E9B0174D882C455F9B59B2A3699C6242 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_8173D066623D41979DD63CD2B2A68FA8 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_48EA8473BA744E0582BBA3731D5AB561 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_3FCEC56232C44BD3BAFDF2946E99089A }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_05EB8DE727754845BC20631227D23CF2 }}
 
       - name: 'Deploy to Azure Functions'
         uses: Azure/functions-action@v1
